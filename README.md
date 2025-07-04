@@ -1,2 +1,0 @@
-# Belavendas
-Bela vendas
