@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>BELLA VENDAS 💜</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      height: 100vh;
+      margin: 0;
+      background-color: #1b1b1b;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    .top-link {
+      position: absolute;
+      top: 5px;
+      width: 100%;
+      text-align: center;
+      font-size: 12px;
+      z-index: 10;
+    }
+
+    .top-link a {
+      color: red;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .container {
+      width: 260px;
+      padding: 20px;
+      background: linear-gradient(to bottom, #6a0dad, #000000);
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+      margin-top: 50px;
+      position: fixed;
+    }
+
+    h2 {
+      text-align: center;
+      color: #d29aff;
+      margin-bottom: 15px;
+    }
+
+    .mod-menu {
+      display: block;
+    }
+
+    .menu-item {
+      margin: 6px 0;
+      padding: 10px;
+      background-color: #7b1fa2;
+      border-radius: 4px;
+      cursor: pointer;
+      text-align: center;
+      color: #fff;
+      position: relative;
+      font-size: 14px;
+    }
+
+    .menu-item::before {
+      content: '►';
+      position: absolute;
+      left: 10px;
+      font-size: 12px;
+      transition: transform 0.2s;
+    }
+
+    .menu-item.open::before {
+      transform: rotate(90deg);
+    }
+
+    .sub-options {
+      display: none;
+      padding-left: 15px;
+      margin-top: 5px;
+    }
+
+    .checkbox-label {
+      font-size: 15px;
+      color: #ffffff;
+    }
+
+    .checkbox-label input {
+      width: 16px;
+      height: 16px;
+      vertical-align: middle;
+      margin-right: 8px;
+      accent-color: #ff00ff;
+    }
+
+    .command-prompt {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #2e2e2e;
+      border: 1px solid #d29aff;
+      border-radius: 4px;
+      font-size: 12px;
+      max-height: 100px;
+      overflow-y: auto;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-link">
+    <a href="https://wa.me/+5561993137783?text=Olá,Quero adquirir painel vip🍓🛒" target="_blank">NÃO CLIQUE AQUI</a>
+  </div>
+
+  <div class="container">
+    <div class="mod-menu" id="modMenu">
+      <h2>BELLA VENDAS</h2>
+
+      <div class="menu-item" onclick="toggleOptions(this, 'trick-options')">Trick Functions</div>
+      <div class="sub-options" id="trick-options">
+        <label class="checkbox-label"><input type="checkbox" onchange="updatePrompt(this, 'TrickHead')"> TrickHead</label><br>
+        <label class="checkbox-label"><input type="checkbox" onchange="updatePrompt(this, 'TrickLock')"> Trick Lock</label>
+      </div>
+
+      <div class="menu-item" onclick="toggleOptions(this, 'legit-options')">Auxilio Functions</div>
+      <div class="sub-options" id="legit-options">
+        <label class="checkbox-label"><input type="checkbox" onchange="updatePrompt(this, 'AuxilioRecuo')"> Auxilio Recuo</label><br>
+        <label class="checkbox-label"><input type="checkbox" onchange="updatePrompt(this, 'AuxilioScope')"> Auxilio Scope</label>
+      </div>
+
+      <div class="command-prompt" id="commandPrompt"></div>
+    </div>
+  </div>
+
+  <script>
+    const loopTimers = {};
+
+    function toggleOptions(element, id) {
+      const options = document.getElementById(id);
+      if (!options) return;
+      const isOpen = options.style.display === 'block';
+      options.style.display = isOpen ? 'none' : 'block';
+      element.classList.toggle('open', !isOpen);
+    }
+
+    function updatePrompt(checkbox, modName) {
+      const prompt = document.getElementById('commandPrompt');
+      let message = modName + (checkbox.checked ? " Ativado" : " Desativado");
+      const color = checkbox.checked ? 'lightgreen' : 'lightcoral';
+      prompt.innerHTML += `<span style="color: ${color};">${message}</span><br>`;
+      prompt.scrollTop = prompt.scrollHeight;
+
+      if (checkbox.checked) {
+        startLoop(modName);
+      } else {
+        stopLoop(modName);
+      }
+    }
+
+    function startLoop(modName) {
+      if (loopTimers[modName]) return;
+
+      loopTimers[modName] = setInterval(() => {
+        if (modName === 'TrickHead') trickhead();
+        else if (modName === 'TrickLock') trickLock();
+        else if (modName === 'AuxilioRecuo') auxilioRecuo();
+        else if (modName === 'AuxilioScope') auxilioScope();
+      }, 1000);
+    }
+
+    function stopLoop(modName) {
+      if (loopTimers[modName]) {
+        clearInterval(loopTimers[modName]);
+        delete loopTimers[modName];
+      }
+    }
+
+    function trickhead() {
+      console.log("Loop ativo: TrickHead executando...");
+      let miraY = 200, headY = 100, velocidade = 0.3;
+      let loop = setInterval(() => {
+        let ajuste = (headY - miraY) * velocidade;
+        miraY += ajuste;
+        console.log("Subindo mira para cabeça:", miraY.toFixed(2));
+        if (Math.abs(headY - miraY) < 1) {
+          clearInterval(loop);
+          console.log("TrickHead: Mira travada no head");
+        }
+      }, 100);
+    }
+
+    function trickLock() {
+      console.log("Loop ativo: Trick Lock executando...");
+      let miraX = 50, inimigoX = 80, velocidade = 0.2;
+      let loop = setInterval(() => {
+        let ajuste = (inimigoX - miraX) * velocidade;
+        miraX += ajuste;
+        console.log("Ajustando lateral:", miraX.toFixed(2));
+        if (Math.abs(inimigoX - miraX) < 1) {
+          clearInterval(loop);
+          console.log("TrickLock: Mira travada lateralmente");
+        }
+      }, 100);
+    }
+
+    function auxilioRecuo() {
+      console.log("Loop ativo: Auxílio de recuo executando...");
+      let recuo = 0, intensidade = 1.5;
+      let loop = setInterval(() => {
+        recuo += intensidade;
+        console.log("Corrigindo recuo:", recuo.toFixed(2));
+        if (recuo >= 15) {
+          clearInterval(loop);
+          console.log("Auxílio de recuo finalizado");
+        }
+      }, 80);
+    }
+
+    function auxilioScope() {
+      console.log("Loop ativo: Auxílio Scope executando...");
+      let mira = 90, alvo = 115, velocidade = 0.25;
+      let loop = setInterval(() => {
+        let ajuste = (alvo - mira) * velocidade;
+        mira += ajuste;
+        console.log("Ajustando mira para:", mira.toFixed(2));
+        if (Math.abs(alvo - mira) < 0.5) {
+          clearInterval(loop);
+          console.log("Scope travado em:", mira.toFixed(2));
+        }
+      }, 100);
+    }
+  </script>
+</body>
+</html>
